@@ -1,21 +1,21 @@
 package com.drifai.web.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.drifai.domain.Beer;
-import com.drifai.repositories.BeerRepository;
-import com.drifai.web.model.BeerDto;
-import com.drifai.web.model.BeerStyleEnum;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+//import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
+import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
+import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
+import static org.springframework.restdocs.request.RequestDocumentation.requestParameters;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
+import static org.springframework.restdocs.snippet.Attributes.key;
+
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -25,11 +25,35 @@ import java.util.UUID;
 
 import javax.validation.ConstraintViolationException;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.constraints.ConstraintDescriptions;
+import org.springframework.restdocs.payload.FieldDescriptor;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 
+
+
+import com.drifai.domain.Beer;
+import com.drifai.domain.BeerStyleEnum;
+import com.drifai.repositories.BeerRepository;
+import com.drifai.web.model.BeerDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+@ExtendWith(RestDocumentationExtension.class)
+// Dev server example
+//@AutoConfigureRestDocs(uriScheme="https", uriHost="dev.springframework.guru", uriPort=80)
+@AutoConfigureRestDocs
 @WebMvcTest(BeerController.class)
 @ComponentScan(basePackages = "com.drifai.web.mappers")
 class BeerControllerTest {
@@ -47,9 +71,30 @@ class BeerControllerTest {
     void getBeerById() throws Exception {
 		given(beerRepository.findById(any())).willReturn
 		(Optional.of(Beer.builder().build()));
-		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString())
+		mockMvc.perform(get("/api/v1/beer/{beerId}", UUID.randomUUID().toString())
+				// just example for restDocs, this query param does not
+				// exist on controller
+				.param("iscold", "yes")
 				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+			    .andDo(document("v1/beer-get", 
+			    		pathParameters(
+		                        parameterWithName("beerId").description("UUID of desired beer to get.")
+                        ),
+			    		requestParameters(
+			    				parameterWithName("iscold").description("Is beer cold? Query Param")
+			    		),
+			    		responseFields(
+			    				fieldWithPath("id").description("id of beer"),
+			    				fieldWithPath("version").description("code version"),
+			    				fieldWithPath("createdDate").description("date created"),
+			    				fieldWithPath("lastModifiedDate").description("date updated"),
+			    				fieldWithPath("beerName").description("beer name"),
+			    				fieldWithPath("beerStyle").description("beer style"),
+			    				fieldWithPath("upc").description("UPC"),
+			    				fieldWithPath("price").description("price"),
+			    				fieldWithPath("quantityOnHand").description("inventory quantity on hand")
+			    		)));
 	}
 	
 	@Test
@@ -58,11 +103,25 @@ class BeerControllerTest {
 		BeerDto beerDto= getValidBeerDTO();
         
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
+        
+        ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
         mockMvc.perform(post("/api/v1/beer/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(beerDtoJson))
-                .andExpect(status().isCreated());
+                .andExpect(status().isCreated())
+                .andDo(document("v1/beer-post",
+                		requestFields(
+                				fields.withPath("id").ignored(),
+                				fields.withPath("version").ignored(),
+                				fields.withPath("createdDate").ignored(),
+                				fields.withPath("lastModifiedDate").ignored(),
+                				fields.withPath("beerName").description("beer name"),
+                				fields.withPath("beerStyle").description("beer style"),
+                				fields.withPath("upc").description("UPC"),
+                				fields.withPath("price").description("price"),
+                				fields.withPath("quantityOnHand").ignored()
+				)));
     }
 	
 	 @Test
@@ -95,6 +154,22 @@ class BeerControllerTest {
 	        		.upc(12345L)
 	        		.build();
 	        return beerDto;
+	 }
+	 
+	 private static class ConstrainedFields {
+		 
+		 private final ConstraintDescriptions constraintDescriptions;
+		 
+		 ConstrainedFields(Class<?> input) {
+			 this.constraintDescriptions = new ConstraintDescriptions(input);
+		 }
+		 
+		 //Uses reflection to look at constraints annotations
+		 private FieldDescriptor withPath(String path) {
+	            return fieldWithPath(path).attributes(key("constraints").value(StringUtils
+	                    .collectionToDelimitedString(this.constraintDescriptions
+	                            .descriptionsForProperty(path), ". ")));
+	        }
 	 }
 
 }
