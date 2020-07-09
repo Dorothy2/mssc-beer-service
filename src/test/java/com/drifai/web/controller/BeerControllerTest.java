@@ -85,7 +85,7 @@ class BeerControllerTest {
 			    				parameterWithName("iscold").description("Is beer cold? Query Param")
 			    		),
 			    		responseFields(
-			    				fieldWithPath("id").description("id of beer"),
+			    				fieldWithPath("beerId").description("id of beer"),
 			    				fieldWithPath("version").description("code version"),
 			    				fieldWithPath("createdDate").description("date created"),
 			    				fieldWithPath("lastModifiedDate").description("date updated"),
@@ -112,7 +112,7 @@ class BeerControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(document("v1/beer-post",
                 		requestFields(
-                				fields.withPath("id").ignored(),
+                				fields.withPath("beerId").ignored(),
                 				fields.withPath("version").ignored(),
                 				fields.withPath("createdDate").ignored(),
                 				fields.withPath("lastModifiedDate").ignored(),

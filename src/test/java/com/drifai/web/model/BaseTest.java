@@ -25,7 +25,6 @@ public class BaseTest {
                 .id(UUID.randomUUID())
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())
-                .myLocalDate(LocalDate.now())
                 .price(new BigDecimal("12.99"))
                 .upc(123123123123L)
                 .build();
