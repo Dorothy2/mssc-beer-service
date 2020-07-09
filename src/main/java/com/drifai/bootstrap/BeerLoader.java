@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import com.drifai.domain.Beer;
+import com.drifai.domain.BeerStyleEnum;
 import com.drifai.repositories.BeerRepository;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,7 @@ public class BeerLoader implements CommandLineRunner {
 		if(beerRepository.count() == 0) {
 			Beer b1 = Beer.builder()
 					.beerName("Mango Bobs")
-					.beerStyle("IPA")
+					.beerStyle(BeerStyleEnum.IPA)
 					.quantityToBrew(200)
 					.minOnHand(12)
 					.price(new BigDecimal(12.95))
@@ -37,7 +38,7 @@ public class BeerLoader implements CommandLineRunner {
 			
 			Beer b2 = Beer.builder()
 					.beerName("Galaxy Cat")
-					.beerStyle("PALE_ALE")
+					.beerStyle(BeerStyleEnum.PALE_ALE)
 					.quantityToBrew(200)
 					.minOnHand(12)
 					.price(new BigDecimal(11.95))
