@@ -28,7 +28,13 @@ public class BeerController {
 	
 	@GetMapping("/{beerId}")
 	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
-		return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
+		try {
+			return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PostMapping
@@ -38,7 +44,13 @@ public class BeerController {
 	
 	@PutMapping("/{beerId}")
 	public ResponseEntity updateBeer(@Valid @PathVariable("beerId") UUID beerId, @RequestBody BeerDto beerDto) {
-		return ResponseEntity<>(beerService.updateNewBeer(beerId, beerDto), HttpStatus.NO_CONTENT;
+		try {
+			return new ResponseEntity<>(beerService.updateBeer(beerId, beerDto), HttpStatus.NO_CONTENT);
+		} catch (NotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
 		
 	}
 }

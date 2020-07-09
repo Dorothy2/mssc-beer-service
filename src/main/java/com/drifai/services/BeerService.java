@@ -11,10 +11,10 @@ import com.drifai.web.model.BeerDto;
 
 public interface BeerService {
 
-	BeerDto getById(UUID beerId);
+	BeerDto getById(UUID beerId) throws NotFoundException;
 
 	BeerDto saveNewBeer(@Valid BeerDto beerDto);
 
-	BeerDto updateNewBeer(@Valid UUID beerId, BeerDto beerDto);
+	BeerDto updateBeer(@Valid UUID beerId, BeerDto beerDto) throws NotFoundException;
 
 }

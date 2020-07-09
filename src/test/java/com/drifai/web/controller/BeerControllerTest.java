@@ -20,7 +20,6 @@ import static org.springframework.restdocs.snippet.Attributes.key;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import javax.validation.ConstraintViolationException;
@@ -42,11 +41,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-
-
-import com.drifai.domain.Beer;
+import com.drifai.bootstrap.BeerLoader;
 import com.drifai.domain.BeerStyleEnum;
-import com.drifai.repositories.BeerRepository;
+import com.drifai.services.BeerService;
 import com.drifai.web.model.BeerDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -63,14 +60,14 @@ class BeerControllerTest {
 	
 	@Autowired
 	ObjectMapper objectMapper;
-	
+		
 	@MockBean
-	BeerRepository beerRepository;
+	BeerService beerService;
 	
 	@Test
     void getBeerById() throws Exception {
-		given(beerRepository.findById(any())).willReturn
-		(Optional.of(Beer.builder().build()));
+		given(beerService.getById(any())).willReturn(getValidBeerDTO());
+//		(Optional.of(Beer.builder().build()));
 		mockMvc.perform(get("/api/v1/beer/{beerId}", UUID.randomUUID().toString())
 				// just example for restDocs, this query param does not
 				// exist on controller
@@ -104,6 +101,8 @@ class BeerControllerTest {
         
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
         
+        given(beerService.saveNewBeer(any())).willReturn(getValidBeerDTO());
+        
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
 
         mockMvc.perform(post("/api/v1/beer/")
@@ -126,6 +125,7 @@ class BeerControllerTest {
 	
 	 @Test
 	    void updateBeerById() throws Exception {
+		 	given(beerService.updateBeer(any(), any())).willReturn(getValidBeerDTO());
 		    // mock a beer object which will be used to update with randomUUID
 		 	BeerDto beerDto= getValidBeerDTO();
 	        String beerDtoJson = objectMapper.writeValueAsString(beerDto);
@@ -151,7 +151,7 @@ class BeerControllerTest {
 	        		.beerName("Beer 1")
 	        		.beerStyle(BeerStyleEnum.PALE_ALE)
 	        		.price(new BigDecimal(1.25))
-	        		.upc(12345L)
+	        		.upc(BeerLoader.BEER_1_UPC)
 	        		.build();
 	        return beerDto;
 	 }

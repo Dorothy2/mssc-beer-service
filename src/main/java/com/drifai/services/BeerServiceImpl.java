@@ -16,13 +16,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Service
+@Service("beerService")
 public class BeerServiceImpl implements BeerService {
 
 	private final BeerRepository beerRepository;
 	private final BeerMapper beerMapper;
 	@Override
-	public BeerDto getById(UUID beerId) {
+	public BeerDto getById(UUID beerId) throws NotFoundException {
 		return beerMapper.beerToBeerDto(beerRepository.findById(beerId)
 				.orElseThrow(NotFoundException::new));
 	}
@@ -33,7 +33,7 @@ public class BeerServiceImpl implements BeerService {
 	}
 
 	@Override
-	public BeerDto updateNewBeer(@Valid UUID beerId, BeerDto beerDto) {
+	public BeerDto updateBeer(@Valid UUID beerId, BeerDto beerDto) throws NotFoundException {
 	    Beer beer = beerRepository.findById(beerId)
 	    		.orElseThrow(NotFoundException::new);
 	    beer.setBeerName(beerDto.getBeerName());
