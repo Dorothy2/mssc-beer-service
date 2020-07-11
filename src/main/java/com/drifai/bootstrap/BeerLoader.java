@@ -11,8 +11,8 @@ import com.drifai.repositories.BeerRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Component
+//@Slf4j
+//@Component
 public class BeerLoader implements CommandLineRunner {
 	private final BeerRepository beerRepository;
 	
@@ -26,14 +26,16 @@ public class BeerLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		loadBeerObjects();
+		//using data.sql file now
+        //   loadBeerObjects();
 	}
 	
 	private void loadBeerObjects() {
 		if(beerRepository.count() == 0) {
 			Beer b1 = Beer.builder()
 					.beerName("Mango Bobs")
-					.beerStyle(BeerStyleEnum.IPA)
+					//.beerStyle(BeerStyleEnum.IPA)
+					.beerStyle("IPA")
 					.quantityToBrew(200)
 					.minOnHand(12)
 					.price(new BigDecimal(12.95))
@@ -42,7 +44,8 @@ public class BeerLoader implements CommandLineRunner {
 			
 			Beer b2 = Beer.builder()
 					.beerName("Galaxy Cat")
-					.beerStyle(BeerStyleEnum.PALE_ALE)
+					//.beerStyle(BeerStyleEnum.PALE_ALE)
+					.beerStyle("PALE_ALE")
 					.quantityToBrew(200)
 					.minOnHand(12)
 					.price(new BigDecimal(11.95))
@@ -51,7 +54,8 @@ public class BeerLoader implements CommandLineRunner {
 			
 			Beer b3 = Beer.builder()
 					.beerName("No Hammers on the Bar")
-					.beerStyle(BeerStyleEnum.ALE)
+					//.beerStyle(BeerStyleEnum.ALE)
+					.beerStyle("ALE")
 					.quantityToBrew(200)
 					.minOnHand(12)
 					.price(new BigDecimal(11.95))
@@ -62,7 +66,7 @@ public class BeerLoader implements CommandLineRunner {
 			beerRepository.save(b2);
 			beerRepository.save(b3);
 			
-			log.debug("Number of beer records created: " + beerRepository.count());
+			//log.debug("Number of beer records created: " + beerRepository.count());
 		}
 	}
 }

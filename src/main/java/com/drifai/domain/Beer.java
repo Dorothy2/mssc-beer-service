@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -45,7 +46,7 @@ public class Beer {
 	@UpdateTimestamp
 	private Timestamp lastModifiedDate;
 	private String beerName;
-	private BeerStyleEnum beerStyle;
+	private String beerStyle;
 	
 	@Column(unique = true)
 	private String upc;

@@ -101,6 +101,7 @@ class BeerControllerTest {
         
         String beerDtoJson = objectMapper.writeValueAsString(beerDto);
         
+        // set up Mockito
         given(beerService.saveNewBeer(any())).willReturn(getValidBeerDTO());
         
         ConstrainedFields fields = new ConstrainedFields(BeerDto.class);
@@ -125,6 +126,7 @@ class BeerControllerTest {
 	
 	 @Test
 	    void updateBeerById() throws Exception {
+		   // set up Mockito
 		 	given(beerService.updateBeer(any(), any())).willReturn(getValidBeerDTO());
 		    // mock a beer object which will be used to update with randomUUID
 		 	BeerDto beerDto= getValidBeerDTO();
@@ -149,7 +151,7 @@ class BeerControllerTest {
 		// mock a beer Dto
 	        BeerDto beerDto = BeerDto.builder()
 	        		.beerName("Beer 1")
-	        		.beerStyle(BeerStyleEnum.PALE_ALE)
+	        		.beerStyle("PALE ALE")
 	        		.price(new BigDecimal(1.25))
 	        		.upc(BeerLoader.BEER_1_UPC)
 	        		.build();
