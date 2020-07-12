@@ -11,7 +11,7 @@ import javax.validation.constraints.Null;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
-import com.drifai.domain.BeerStyleEnum;
+//import com.drifai.domain.BeerStyleEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -48,8 +48,8 @@ public class BeerDto {
 	private String beerName;
 	
 	@NotNull
-	//private BeerStyleEnum beerStyle;
-	private String beerStyle;
+	private BeerStyleEnum beerStyle;
+	//private String beerStyle;
 	
 	@NotNull
 	private String upc;
