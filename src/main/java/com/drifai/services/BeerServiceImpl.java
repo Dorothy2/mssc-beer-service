@@ -17,7 +17,6 @@ import com.drifai.web.controller.NotFoundException;
 import com.drifai.web.model.BeerDto;
 import com.drifai.web.model.BeerPagedList;
 import com.drifai.web.model.BeerStyleEnum;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,9 +27,12 @@ public class BeerServiceImpl implements BeerService {
 	private final BeerRepository beerRepository;
 	private final BeerMapper beerMapper;
 	@Override
-	public BeerDto getById(UUID beerId) throws NotFoundException {
-		return beerMapper.beerToBeerDto(beerRepository.findById(beerId)
-				.orElseThrow(NotFoundException::new));
+	public BeerDto getById(UUID beerId, boolean includeInventory) throws NotFoundException {
+		if(includeInventory) {
+			return beerMapper.beerToBeerDtoWithInventory(beerRepository.findById(beerId).orElseThrow(NotFoundException::new ));
+		} else {
+			return beerMapper.beerToBeerDto(beerRepository.findById(beerId).orElseThrow(NotFoundException::new));
+		}
 	}
 
 	@Override
@@ -51,7 +53,7 @@ public class BeerServiceImpl implements BeerService {
 	}
 	
 	 @Override
-	    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageRequest) {
+	    public BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, boolean includeInventory, PageRequest pageRequest) {
 
 	        BeerPagedList beerPagedList;
 	        Page<Beer> beerPage;
@@ -68,16 +70,29 @@ public class BeerServiceImpl implements BeerService {
 	        } else {
 	            beerPage = beerRepository.findAll(pageRequest);
 	        }
+	        if(includeInventory) {
+	        	beerPagedList = new BeerPagedList(beerPage
+		                .getContent()
+		                .stream()
+		                .map(beerMapper::beerToBeerDtoWithInventory)
+		                .collect(Collectors.toList()),
+		                PageRequest
+		                        .of(beerPage.getPageable().getPageNumber(),
+		                                beerPage.getPageable().getPageSize()),
+		                beerPage.getTotalElements());
+	        } else {
+	        	beerPagedList = new BeerPagedList(beerPage
+		                .getContent()
+		                .stream()
+		                .map(beerMapper::beerToBeerDto)
+		                .collect(Collectors.toList()),
+		                PageRequest
+		                        .of(beerPage.getPageable().getPageNumber(),
+		                                beerPage.getPageable().getPageSize()),
+		                beerPage.getTotalElements());
+	        }
 
-	        beerPagedList = new BeerPagedList(beerPage
-	                .getContent()
-	                .stream()
-	                .map(beerMapper::beerToBeerDto)
-	                .collect(Collectors.toList()),
-	                PageRequest
-	                        .of(beerPage.getPageable().getPageNumber(),
-	                                beerPage.getPageable().getPageSize()),
-	                beerPage.getTotalElements());
+	        
 
 	        return beerPagedList;
 	    }

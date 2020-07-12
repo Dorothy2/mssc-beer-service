@@ -35,9 +35,13 @@ public class BeerController {
 
 	
 	@GetMapping("/{beerId}")
-	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
+	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId, 
+			                                  @RequestParam(value = "includeInventory", required = false) Boolean includeInventory) {
 		try {
-			return new ResponseEntity<>(beerService.getById(beerId), HttpStatus.OK);
+			if(includeInventory == null) {
+				includeInventory = false;
+			}
+			return new ResponseEntity<>(beerService.getById(beerId, includeInventory), HttpStatus.OK);
 		} catch (NotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -66,7 +70,8 @@ public class BeerController {
     public ResponseEntity<BeerPagedList> listBeers(@RequestParam(value = "pageNumber", required = false) Integer pageNumber,
                                                    @RequestParam(value = "pageSize", required = false) Integer pageSize,
                                                    @RequestParam(value = "beerName", required = false) String beerName,
-                                                   @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle){
+                                                   @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle,
+                                                   @RequestParam(value = "includeInventory", required = false) Boolean includeInventory){
 
         if (pageNumber == null || pageNumber < 0){
             pageNumber = DEFAULT_PAGE_NUMBER;
@@ -75,8 +80,11 @@ public class BeerController {
         if (pageSize == null || pageSize < 1) {
             pageSize = DEFAULT_PAGE_SIZE;
         }
+        if(includeInventory == null) {
+        	includeInventory = false;
+        }
 
-        BeerPagedList beerList = beerService.listBeers(beerName, beerStyle, PageRequest.of(pageNumber, pageSize));
+        BeerPagedList beerList = beerService.listBeers(beerName, beerStyle, includeInventory, PageRequest.of(pageNumber, pageSize));
 
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }

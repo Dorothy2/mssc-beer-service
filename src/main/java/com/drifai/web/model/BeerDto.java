@@ -49,7 +49,6 @@ public class BeerDto {
 	
 	@NotNull
 	private BeerStyleEnum beerStyle;
-	//private String beerStyle;
 	
 	@NotNull
 	private String upc;

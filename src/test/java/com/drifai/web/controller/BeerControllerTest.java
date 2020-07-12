@@ -1,6 +1,7 @@
 package com.drifai.web.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 //import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -66,7 +67,7 @@ class BeerControllerTest {
 	
 	@Test
     void getBeerById() throws Exception {
-		given(beerService.getById(any())).willReturn(getValidBeerDTO());
+		given(beerService.getById(any(), anyBoolean())).willReturn(getValidBeerDTO());
 //		(Optional.of(Beer.builder().build()));
 		mockMvc.perform(get("/api/v1/beer/{beerId}", UUID.randomUUID().toString())
 				// just example for restDocs, this query param does not
