@@ -1,5 +1,6 @@
 package com.drifai.web.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -11,8 +12,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
-public class BeerPagedList extends PageImpl<BeerDto> {
+public class BeerPagedList extends PageImpl<BeerDto> implements Serializable {
 	
+	private static final long serialVersionUID = -5667526183846967804L;
+
 	@JsonCreator(mode = JsonCreator.Mode.PROPERTIES)
 	public BeerPagedList(@JsonProperty("content") List<BeerDto> content,
 			@JsonProperty("number") int number,

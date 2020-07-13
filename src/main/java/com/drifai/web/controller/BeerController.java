@@ -22,7 +22,9 @@ import com.drifai.web.model.BeerPagedList;
 import com.drifai.web.model.BeerStyleEnum;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 @RestController
@@ -43,7 +45,6 @@ public class BeerController {
 			}
 			return new ResponseEntity<>(beerService.getById(beerId, includeInventory), HttpStatus.OK);
 		} catch (NotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
@@ -72,7 +73,6 @@ public class BeerController {
                                                    @RequestParam(value = "beerName", required = false) String beerName,
                                                    @RequestParam(value = "beerStyle", required = false) BeerStyleEnum beerStyle,
                                                    @RequestParam(value = "includeInventory", required = false) Boolean includeInventory){
-
         if (pageNumber == null || pageNumber < 0){
             pageNumber = DEFAULT_PAGE_NUMBER;
         }
@@ -83,9 +83,7 @@ public class BeerController {
         if(includeInventory == null) {
         	includeInventory = false;
         }
-
         BeerPagedList beerList = beerService.listBeers(beerName, beerStyle, includeInventory, PageRequest.of(pageNumber, pageSize));
-
         return new ResponseEntity<>(beerList, HttpStatus.OK);
     }
 

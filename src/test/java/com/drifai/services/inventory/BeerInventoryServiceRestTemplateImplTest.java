@@ -13,7 +13,7 @@ import com.drifai.bootstrap.BeerLoader;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-//@Disabled // utility for manual testing
+@Disabled // utility for manual testing
 @SpringBootTest
 class BeerInventoryServiceRestTemplateImplTest {
 	

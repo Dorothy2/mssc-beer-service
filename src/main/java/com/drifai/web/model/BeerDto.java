@@ -1,5 +1,6 @@
 package com.drifai.web.model;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -26,8 +27,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDto {
+public class BeerDto implements Serializable {
 	
+	private static final long serialVersionUID = -7259099783383800602L;
+
 	@Null
 	@JsonProperty("beerId")
 	private UUID id;
