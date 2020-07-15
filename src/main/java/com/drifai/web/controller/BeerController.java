@@ -49,6 +49,20 @@ public class BeerController {
 			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
 		}
 	}
+
+	@GetMapping("/upc/{upc}")
+	public ResponseEntity<BeerDto> getBeerByUPC(@PathVariable("upc") String upc,
+			                          @RequestParam(value = "includeInventory", required = false) Boolean includeInventory) {
+		try {
+			if(includeInventory == null) {
+				includeInventory = false;
+			}
+			return new ResponseEntity<>(beerService.getByUPC(upc, includeInventory), HttpStatus.OK);
+		} catch (NotFoundException e) {
+			e.printStackTrace();
+			return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@PostMapping
 	public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
