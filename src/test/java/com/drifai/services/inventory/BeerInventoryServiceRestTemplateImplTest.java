@@ -1,7 +1,5 @@
 package com.drifai.services.inventory;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -12,7 +10,6 @@ import com.drifai.bootstrap.BeerLoader;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Disabled // utility for manual testing
 @SpringBootTest
 class BeerInventoryServiceRestTemplateImplTest {

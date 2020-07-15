@@ -29,8 +29,20 @@ public class BeerServiceImpl implements BeerService {
 
 	private final BeerRepository beerRepository;
 	private final BeerMapper beerMapper;
+	
 	@Override
-	@Cacheable(cacheNames = "beerCache", condition = "#includeInventory == false")
+	@Cacheable(cacheNames = "beerUPCCache", key="#upc", condition = "#includeInventory == false")
+	public BeerDto getByUPC(String upc, boolean includeInventory) throws NotFoundException {
+		if(includeInventory) {
+			return beerMapper.beerToBeerDtoWithInventory(beerRepository.findByUpc(upc).orElseThrow(NotFoundException::new ));
+		} else {
+			return beerMapper.beerToBeerDto(beerRepository.findByUpc(upc).orElseThrow(NotFoundException::new));
+		}
+	}
+
+
+	@Override
+	@Cacheable(cacheNames = "beerCache", key = "#beerId", condition = "#includeInventory == false")
 	public BeerDto getById(UUID beerId, boolean includeInventory) throws NotFoundException {
 		if(includeInventory) {
 			return beerMapper.beerToBeerDtoWithInventory(beerRepository.findById(beerId).orElseThrow(NotFoundException::new ));
@@ -103,6 +115,4 @@ public class BeerServiceImpl implements BeerService {
 
         return beerPagedList;
     }
-
-
 }

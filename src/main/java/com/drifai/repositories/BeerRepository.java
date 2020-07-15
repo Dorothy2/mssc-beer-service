@@ -1,5 +1,6 @@
 package com.drifai.repositories;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -17,9 +18,12 @@ import com.drifai.web.model.BeerStyleEnum;
  *
  */
 public interface BeerRepository extends PagingAndSortingRepository<Beer, UUID> {
+	
 	 	Page<Beer> findAllByBeerName(String beerName, Pageable pageable);
 
 	    Page<Beer> findAllByBeerStyle(BeerStyleEnum beerStyle, Pageable pageable);
 
 	    Page<Beer> findAllByBeerNameAndBeerStyle(String beerName, BeerStyleEnum beerStyle, Pageable pageable);
+
+		Optional<Beer> findByUpc(String upc);
 }

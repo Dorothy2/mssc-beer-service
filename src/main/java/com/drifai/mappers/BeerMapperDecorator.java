@@ -7,18 +7,20 @@ import com.drifai.services.inventory.BeerInventoryService;
 import com.drifai.web.model.BeerDto;
 
 public abstract class BeerMapperDecorator implements BeerMapper{
+	@Autowired
 	private BeerInventoryService beerInventoryService;
+	@Autowired
 	private BeerMapper mapper;
 	
-	@Autowired
-	public void setBeerInventoryService(BeerInventoryService beerInventoryService) {
-		this.beerInventoryService = beerInventoryService;
-	}
-	
-	@Autowired
-	public void setMapper(BeerMapper mapper) {
-		this.mapper = mapper;
-	}
+//	@Autowired
+//	public void setBeerInventoryService(BeerInventoryService beerInventoryService) {
+//		this.beerInventoryService = beerInventoryService;
+//	}
+//	
+//	@Autowired
+//	public void setMapper(BeerMapper mapper) {
+//		this.mapper = mapper;
+//	}
 	
 	@Override
 	public BeerDto beerToBeerDtoWithInventory(Beer beer) {

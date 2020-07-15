@@ -15,6 +15,8 @@ import com.drifai.web.model.BeerStyleEnum;
 public interface BeerService {
 
 	BeerDto getById(UUID beerId, boolean includeInventory) throws NotFoundException;
+	
+	BeerDto getByUPC(String upc, boolean includeInventory) throws NotFoundException;
 
 	BeerDto saveNewBeer(@Valid BeerDto beerDto);
 
