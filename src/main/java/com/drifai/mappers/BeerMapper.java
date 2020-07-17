@@ -1,7 +1,5 @@
 package com.drifai.mappers;
 
-import java.util.Optional;
-
 import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
