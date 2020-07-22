@@ -1,4 +1,4 @@
-package com.drifai.services;
+package com.drifai.brewing;
 
 import java.util.List;
 

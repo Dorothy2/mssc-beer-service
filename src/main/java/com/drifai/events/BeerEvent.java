@@ -1,19 +1,21 @@
 package com.drifai.events;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
+import lombok.NoArgsConstructor;
 import java.io.Serializable;
 
 import com.drifai.web.model.BeerDto;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class BeerEvent implements Serializable {
 	
 	private static final long serialVersionUID = 5290417671032203893L;
 	
-	private final BeerDto beerDto;
+	protected BeerDto beerDto;
+	
 }
