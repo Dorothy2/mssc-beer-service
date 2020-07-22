@@ -1,4 +1,4 @@
-package com.drifai.events;
+package guru.sfg.common.events;
 
 import com.drifai.web.model.BeerDto;
 
