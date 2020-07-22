@@ -4,7 +4,7 @@ import org.mapstruct.DecoratedWith;
 import org.mapstruct.Mapper;
 
 import com.drifai.domain.Beer;
-import com.drifai.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerDto;
 
 @Mapper(uses = DateMapper.class)
 @DecoratedWith(BeerMapperDecorator.class)

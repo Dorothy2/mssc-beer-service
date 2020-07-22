@@ -1,9 +1,12 @@
 package guru.sfg.common.events;
 
-import com.drifai.web.model.BeerDto;
+import org.springframework.stereotype.Component;
+
+import guru.sfg.common.web.model.BeerDto;
 
 import lombok.NoArgsConstructor;
 
+@Component
 @NoArgsConstructor
 public class BrewBeerEvent extends BeerEvent {
 

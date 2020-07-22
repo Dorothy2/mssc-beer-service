@@ -15,9 +15,9 @@ import com.drifai.domain.Beer;
 import com.drifai.mappers.BeerMapper;
 import com.drifai.repositories.BeerRepository;
 import com.drifai.web.controller.NotFoundException;
-import com.drifai.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerDto;
 import com.drifai.web.model.BeerPagedList;
-import com.drifai.web.model.BeerStyleEnum;
+import guru.sfg.common.web.model.BeerStyleEnum;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,7 +61,8 @@ public class BeerServiceImpl implements BeerService {
 	    Beer beer = beerRepository.findById(beerId)
 	    		.orElseThrow(NotFoundException::new);
 	    beer.setBeerName(beerDto.getBeerName());
-	    beer.setBeerStyle(beerDto.getBeerStyle().name());
+	    //beer.setBeerStyle(beerDto.getBeerStyle().name());
+	    beer.setBeerStyle(beerDto.getBeerStyle());
 	    beer.setPrice(beerDto.getPrice());
 	    beer.setUpc(beerDto.getUpc());
 	    

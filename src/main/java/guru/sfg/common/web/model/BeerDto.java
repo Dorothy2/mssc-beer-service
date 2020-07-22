@@ -1,8 +1,7 @@
-package com.drifai.web.model;
+package guru.sfg.common.web.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -15,7 +14,6 @@ import javax.validation.constraints.Size;
 //import com.drifai.domain.BeerStyleEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import lombok.AllArgsConstructor;
@@ -51,7 +49,8 @@ public class BeerDto implements Serializable {
 	private String beerName;
 	
 	@NotNull
-	private BeerStyleEnum beerStyle;
+	//private BeerStyleEnum beerStyle;
+	private String beerStyle;
 	
 	@NotNull
 	private String upc;

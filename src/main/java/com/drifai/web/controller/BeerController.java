@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.drifai.services.BeerService;
-import com.drifai.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerDto;
 import com.drifai.web.model.BeerPagedList;
-import com.drifai.web.model.BeerStyleEnum;
+import guru.sfg.common.web.model.BeerStyleEnum;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

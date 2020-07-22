@@ -8,6 +8,10 @@ import org.springframework.boot.test.autoconfigure.json.JsonTest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 
+import guru.sfg.common.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerStyleEnum;
+
+
 @Slf4j
 @JsonTest
 class BeerDtoTest extends BaseTest {

@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import guru.sfg.common.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerStyleEnum;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -20,7 +23,8 @@ public class BaseTest {
         return  BeerDto.builder()
         		.id(UUID.randomUUID())
                 .beerName("BeerName")
-                .beerStyle(BeerStyleEnum.ALE)
+                //.beerStyle(BeerStyleEnum.ALE)
+                .beerStyle("ALE")
                 .id(UUID.randomUUID())
                 .createdDate(OffsetDateTime.now())
                 .lastModifiedDate(OffsetDateTime.now())

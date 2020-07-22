@@ -1,7 +1,5 @@
 package com.drifai.brewing;
 
-import javax.jms.Destination;
-
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.stereotype.Service;
@@ -9,10 +7,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.drifai.config.JmsConfig;
 import com.drifai.domain.Beer;
-import com.drifai.events.BrewBeerEvent;
-import com.drifai.events.NewInventoryEvent;
+import guru.sfg.common.events.BrewBeerEvent;
+import guru.sfg.common.events.NewInventoryEvent;
 import com.drifai.repositories.BeerRepository;
-import com.drifai.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

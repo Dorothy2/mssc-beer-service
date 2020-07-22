@@ -12,6 +12,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
 
+import guru.sfg.common.web.model.BeerDto;
+
 public class BeerPagedList extends PageImpl<BeerDto> implements Serializable {
 	
 	private static final long serialVersionUID = -5667526183846967804L;

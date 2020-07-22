@@ -1,4 +1,4 @@
-package com.drifai.web.model;
+package guru.sfg.common.web.model;
 
 /**
  * Created by jt on 2019-05-12.

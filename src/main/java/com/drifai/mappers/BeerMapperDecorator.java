@@ -2,7 +2,7 @@ package com.drifai.mappers;
 
 import com.drifai.domain.Beer;
 import com.drifai.services.inventory.BeerInventoryService;
-import com.drifai.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerDto;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

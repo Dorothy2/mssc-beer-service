@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.drifai.config.JmsConfig;
 import com.drifai.domain.Beer;
-import com.drifai.events.BrewBeerEvent;
+import guru.sfg.common.events.BrewBeerEvent;
 import com.drifai.mappers.BeerMapper;
 import com.drifai.repositories.BeerRepository;
 import com.drifai.services.inventory.BeerInventoryService;

@@ -25,9 +25,9 @@ public class BeerLoader implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		if(beerRepository.count() == 0) {
-          loadBeerObjects();
-		}
+		//if(beerRepository.count() == 0) {
+        //  loadBeerObjects();
+		//}
 	}
 	
 	private void loadBeerObjects() {
@@ -61,12 +61,12 @@ public class BeerLoader implements CommandLineRunner {
 					.price(new BigDecimal(11.95))
 					.upc(BEER_3_UPC)
 					.build();
+			// After ActiveMQ messaging service implemented, no longer need to save objects
+			//beerRepository.save(b1);
+			//beerRepository.save(b2);
+			//beerRepository.save(b3);
 			
-			beerRepository.save(b1);
-			beerRepository.save(b2);
-			beerRepository.save(b3);
-			
-			log.debug("Number of beer records created: " + beerRepository.count());
+			//log.debug("Number of beer records created: " + beerRepository.count());
 		}
 	}
 }

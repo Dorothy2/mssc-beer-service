@@ -44,8 +44,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.drifai.bootstrap.BeerLoader;
 import com.drifai.services.BeerService;
-import com.drifai.web.model.BeerDto;
-import com.drifai.web.model.BeerStyleEnum;
+import guru.sfg.common.web.model.BeerDto;
+import guru.sfg.common.web.model.BeerStyleEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(RestDocumentationExtension.class)
@@ -152,8 +152,8 @@ class BeerControllerTest {
 		// mock a beer Dto
 	        BeerDto beerDto = BeerDto.builder()
 	        		.beerName("Beer 1")
-	        		//.beerStyle("PALE ALE")
-	        		.beerStyle(BeerStyleEnum.PALE_ALE)
+	        		.beerStyle("PALE ALE")
+	        		//.beerStyle(BeerStyleEnum.PALE_ALE)
 	        		.price(new BigDecimal(1.25))
 	        		.upc(BeerLoader.BEER_1_UPC)
 	        		.build();
