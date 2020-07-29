@@ -1,4 +1,4 @@
-package com.drifai.web.model;
+package guru.sfg.brewery.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -11,8 +11,6 @@ import org.springframework.data.domain.Pageable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.JsonNode;
-
-import guru.sfg.common.web.model.BeerDto;
 
 public class BeerPagedList extends PageImpl<BeerDto> implements Serializable {
 	

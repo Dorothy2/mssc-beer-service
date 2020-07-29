@@ -15,10 +15,10 @@ import com.drifai.domain.Beer;
 import com.drifai.mappers.BeerMapper;
 import com.drifai.repositories.BeerRepository;
 import com.drifai.web.controller.NotFoundException;
-import guru.sfg.common.web.model.BeerDto;
-import com.drifai.web.model.BeerPagedList;
-import guru.sfg.common.web.model.BeerStyleEnum;
 
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.BeerPagedList;
+import guru.sfg.brewery.model.BeerStyleEnum;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

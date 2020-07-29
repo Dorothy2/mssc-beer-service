@@ -44,9 +44,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.drifai.bootstrap.BeerLoader;
 import com.drifai.services.BeerService;
-import guru.sfg.common.web.model.BeerDto;
-import guru.sfg.common.web.model.BeerStyleEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.BeerStyleEnum;
 
 @ExtendWith(RestDocumentationExtension.class)
 // Dev server example

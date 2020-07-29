@@ -7,10 +7,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.drifai.config.JmsConfig;
 import com.drifai.domain.Beer;
-import guru.sfg.common.events.BrewBeerEvent;
-import guru.sfg.common.events.NewInventoryEvent;
+
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.events.BrewBeerEvent;
+import guru.sfg.brewery.model.events.NewInventoryEvent;
+
 import com.drifai.repositories.BeerRepository;
-import guru.sfg.common.web.model.BeerDto;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,9 +1,8 @@
-package guru.sfg.common.events;
+package guru.sfg.brewery.model.events;
 
 import org.springframework.stereotype.Component;
 
-import guru.sfg.common.web.model.BeerDto;
-
+import guru.sfg.brewery.model.BeerDto;
 import lombok.NoArgsConstructor;
 
 @Component

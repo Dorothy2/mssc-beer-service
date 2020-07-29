@@ -8,9 +8,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 
 import com.drifai.web.controller.NotFoundException;
-import guru.sfg.common.web.model.BeerDto;
-import com.drifai.web.model.BeerPagedList;
-import guru.sfg.common.web.model.BeerStyleEnum;
+
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.BeerPagedList;
+import guru.sfg.brewery.model.BeerStyleEnum;
 
 public interface BeerService {
 

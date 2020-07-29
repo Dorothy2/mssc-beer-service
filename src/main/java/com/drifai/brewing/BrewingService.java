@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
 
 import com.drifai.config.JmsConfig;
 import com.drifai.domain.Beer;
-import guru.sfg.common.events.BrewBeerEvent;
 import com.drifai.mappers.BeerMapper;
 import com.drifai.repositories.BeerRepository;
 import com.drifai.services.inventory.BeerInventoryService;
 
+import guru.sfg.brewery.model.events.BrewBeerEvent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 

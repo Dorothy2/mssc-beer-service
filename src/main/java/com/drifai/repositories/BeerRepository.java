@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.drifai.domain.Beer;
 
-import guru.sfg.common.web.model.BeerStyleEnum;
+import guru.sfg.brewery.model.BeerStyleEnum;
 
 /**
  * 

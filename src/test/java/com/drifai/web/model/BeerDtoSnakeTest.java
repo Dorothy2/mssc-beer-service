@@ -12,10 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import guru.sfg.common.web.model.BeerDto;
-import guru.sfg.common.web.model.BeerStyleEnum;
-
-
+import guru.sfg.brewery.model.BeerDto;
+import guru.sfg.brewery.model.BeerStyleEnum;
 import lombok.extern.slf4j.Slf4j;
 
 @ActiveProfiles("snake")
