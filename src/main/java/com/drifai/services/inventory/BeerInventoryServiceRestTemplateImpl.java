@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryService {
 
-	public final static String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
+	public static final String INVENTORY_PATH = "/api/v1/beer/{beerId}/inventory";
 	private final RestTemplate restTemplate;
 	
 	private String beerInventoryServiceHost;

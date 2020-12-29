@@ -35,6 +35,7 @@ public class BeerInventoryServiceFeign implements BeerInventoryService{
 		    		.mapToInt(BeerInventoryDto::getQuantityOnHand)
 		    		.sum();
 		    
+		    log.debug("BeerId: " + beerId + " On hand is: " + onHand);		    
 		    return onHand;
 		}
 }
